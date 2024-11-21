@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DrumKit</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            /* Make sure the <html> and <body> take up the full height of the viewport */
+            margin: 0;
+            /* Remove default margin */
+            padding: 0;
+            /* Remove default padding */
+            background-image: url('https://www.fittingfarewell.uk.com/wp-content/uploads/2019/01/funeral-traditions.jpg');
+            background-repeat: no-repeat;
+            background-position:center;
+            background-size: cover;
+        }
+
+        .group-keys {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            height: 100%;
+        }
+        .playing{
+            transform:scale(1.1);
+            border-color:#ffc600;
+            box-shadow: 0 0 10px #ffc600;
+        }
+        .key {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.07s;
+            padding: 15px;
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            border: 3px solid black;
+        }
+        .sound{
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="group-keys">
+        <div data-key="65" class="key"><kbd>A</kbd><div class="sound">CLAP</div></div>
+        <div data-key="68" class="key"><kbd>D</kbd><div class="sound">KICK</div></div>
+        <div data-key="83" class="key"><kbd>S</kbd><div class="sound">HIHAT</div></div>
+        <div data-key="70" class="key"><kbd>F</kbd><div class="sound">OPENHAT</div></div>
+        <div data-key="71" class="key"><kbd>G</kbd><div class="sound">BOOM</div></div>
+        <div data-key="72" class="key"><kbd>H</kbd><div class="sound">RIDE</div></div>
+        <div data-key="74" class="key"><kbd>J</kbd><div class="sound">SNARE</div></div>
+        <div data-key="75" class="key"><kbd>K</kbd><div class="sound">TOM</div></div>
+        <div data-key="76" class="key"><kbd>L</kbd><div class="sound">TINK</div></div>
+    </div>
+
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="83" src="sounds/hihat.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="70" src="sounds/openhat.wav"></audio>
+    <audio data-key="71" src="sounds/boom.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="74" src="sounds/snare.wav"></audio>
+    <audio data-key="75" src="sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/tink.wav"></audio>
+<script>
+    const keyPressed = window.addEventListener('keydown',(event)=>{
+        console.log(event.keyCode)
+       const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+       const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+       if(!audio) return;
+       audio.currentTime = 0;
+       audio.play();
+       key.classList.add('playing');
+    })
+</script>
+</body>
+
+</html>
